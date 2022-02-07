@@ -1,0 +1,2 @@
+Begin with one laptop or PC, use 3 threads as each object.
+One for Server, Client, Router etc.
