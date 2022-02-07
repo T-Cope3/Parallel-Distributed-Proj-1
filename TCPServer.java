@@ -1,4 +1,4 @@
-   import java.io.*;
+import java.io.*;
    import java.net.*;
 
     public class TCPServer {
@@ -9,11 +9,24 @@
          PrintWriter out = null; // for writing to ServerRouter
          BufferedReader in = null; // for reading form ServerRouter
 			InetAddress addr = InetAddress.getLocalHost();
-			String host = addr.getHostAddress(); // Server machine's IP			
-			String routerName = "j263-08.cse1.spsu.edu"; // ServerRouter host name
+			
+			//this line gives hostName/hostIP, which can be used for setup of
+			//router name and client address (when used locally)
+			String host = addr.getHostAddress(); // Server machine's IP
+			String[] iNetHost = new String[2];
+			
+			System.out.println("Host: " + addr);
+
+			iNetHost = addr.toString().split("/");
+						
+			System.out.println("Currently the serverhost is " + iNetHost[1]);
+			System.out.println("Currently the serverip is " + iNetHost[0]);
+			
+			String routerName = iNetHost[0]; // ServerRouter host name
 			int SockNum = 5555; // port number
 			
 			// Tries to connect to the ServerRouter
+			//Have to launch the ServerRouter first in order for the connection to open
          try {
             Socket = new Socket(routerName, SockNum);
             out = new PrintWriter(Socket.getOutputStream(), true);
@@ -31,7 +44,7 @@
       	// Variables for message passing			
          String fromServer; // messages sent to ServerRouter
          String fromClient; // messages received from ServerRouter      
- 			String address ="10.5.3.196"; // destination IP (Client)
+ 			String address = iNetHost[1]; //"10.5.3.196"; // destination IP (Client)
 			
 			// Communication process (initial sends/receives)
 			out.println(address);// initial send (IP of the destination Client)
