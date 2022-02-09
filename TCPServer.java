@@ -1,29 +1,30 @@
 import java.io.*;
-   import java.net.*;
+import java.net.*;
 
     public class TCPServer {
-       public static void main(String[] args) throws IOException {
+       public static void main(String[] args) throws IOException 
+       {
       	
 			// Variables for setting up connection and communication
-         Socket Socket = null; // socket to connect with ServerRouter
-         PrintWriter out = null; // for writing to ServerRouter
-         BufferedReader in = null; // for reading form ServerRouter
-			InetAddress addr = InetAddress.getLocalHost();
+        Socket Socket = null; // socket to connect with ServerRouter
+        PrintWriter out = null; // for writing to ServerRouter
+        BufferedReader in = null; // for reading form ServerRouter
+		InetAddress addr = InetAddress.getLocalHost();
 			
 			//this line gives hostName/hostIP, which can be used for setup of
 			//router name and client address (when used locally)
-			String host = addr.getHostAddress(); // Server machine's IP
-			String[] iNetHost = new String[2];
+		String host = addr.getHostAddress(); // Server machine's IP
+		String[] iNetHost = new String[2];
 			
-			System.out.println("Host: " + addr);
+		System.out.println("Host: " + addr);
 
-			iNetHost = addr.toString().split("/");
+		iNetHost = addr.toString().split("/");
 						
-			System.out.println("Currently the serverhost is " + iNetHost[1]);
-			System.out.println("Currently the serverip is " + iNetHost[0]);
+		System.out.println("Currently the serverip is " + iNetHost[1]);
+		System.out.println("Currently the serverhost is " + iNetHost[0]);
 			
-			String routerName = iNetHost[0]; // ServerRouter host name
-			int SockNum = 5555; // port number
+		String routerName = iNetHost[0]; // ServerRouter host name
+		int SockNum = 5555; // port number
 			
 			// Tries to connect to the ServerRouter
 			//Have to launch the ServerRouter first in order for the connection to open
@@ -52,7 +53,8 @@ import java.io.*;
 			System.out.println("ServerRouter: " + fromClient);
 			         
 			// Communication while loop
-      	while ((fromClient = in.readLine()) != null) {
+      	while ((fromClient = in.readLine()) != null) 
+      	{
             System.out.println("Client said: " + fromClient);
             if (fromClient.equals("Bye.")) // exit statement
 					break;
@@ -65,5 +67,5 @@ import java.io.*;
          out.close();
          in.close();
          Socket.close();
-      }
+      } //end of main
    }

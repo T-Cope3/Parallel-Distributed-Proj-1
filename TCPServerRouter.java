@@ -1,17 +1,18 @@
 import java.net.*;
-   import java.io.*;
+import java.io.*;
    
-
-    public class TCPServerRouter {
-       public static void main(String[] args) throws IOException {
+    public class TCPServerRouter 
+    {    	
+       public static void main(String[] args) throws IOException
+       {
          Socket clientSocket = null; // socket for the thread
          Object [][] RoutingTable = new Object [10][2]; // routing table
 			int SockNum = 5555; // port number
 			Boolean Running = true;
-			int ind = 0; // indext in the routing table	
+			int ind = 0; // index in the routing table	
 
 			//Accepting connections
-         ServerSocket serverSocket = null; // server socket for accepting connections
+         ServerSocket serverSocket = null; //server socket for accepting connections
          try {
             serverSocket = new ServerSocket(5555);
             System.out.println("ServerRouter is Listening on port: 5555.");
@@ -41,5 +42,5 @@ import java.net.*;
 		   clientSocket.close();
          serverSocket.close();
 
-      }
+      } //end of the main
    }

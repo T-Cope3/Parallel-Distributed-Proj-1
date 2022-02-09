@@ -1,8 +1,9 @@
-   import java.io.*;
-   import java.net.*;
+import java.io.*;
+import java.net.*;
 
     public class TCPClient {
-       public static void main(String[] args) throws IOException {
+       public static void main(String[] args) throws IOException
+	   {
       	
 			// Variables for setting up connection and communication
          Socket Socket = null; // socket to connect with ServerRouter
@@ -19,8 +20,8 @@
 
 			iNetHost = addr.toString().split("/");
 						
-			System.out.println("Currently the serverhost is " + iNetHost[1]);
-			System.out.println("Currently the serverip is " + iNetHost[0]);
+			System.out.println("Currently the serverhost is " + iNetHost[0]);
+			System.out.println("Currently the serverip is " + iNetHost[1]);
 			
 			String routerName = iNetHost[0]; // ServerRouter host name
 			
@@ -42,10 +43,13 @@
                System.err.println("Couldn't get I/O for the connection to: " + routerName);
                System.exit(1);
             }
-				
-      	// Variables for message passing	
-         Reader reader = new FileReader("file.txt"); 
-			BufferedReader fromFile =  new BufferedReader(reader); // reader for the string file
+         
+         //handles the FILE now, if not created will make an empty one
+         File f1 = new File("file.txt");
+         f1.createNewFile();
+         Reader reader = new FileReader(f1);
+        	 
+		 BufferedReader fromFile =  new BufferedReader(reader); // reader for the string file
          String fromServer; // messages received from ServerRouter
          String fromUser; // messages sent to ServerRouter
 			String address = iNetHost[1]; // destination IP (Server)
@@ -73,8 +77,7 @@
                out.println(fromUser); // sending the strings to the Server via ServerRouter
 					t0 = System.currentTimeMillis();
             }
-         }
-      	
+         }      	
 			// closing connections
          out.close();
          in.close();
