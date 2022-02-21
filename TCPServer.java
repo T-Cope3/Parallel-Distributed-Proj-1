@@ -58,7 +58,7 @@ import java.net.*;
             System.out.println("Client said: " + fromClient);
             if (fromClient.equals("Bye.")) // exit statement
 					break;
-				fromServer = fromClient.toUpperCase(); // converting received message to upper case
+				fromServer = fromClient.toString().toUpperCase(); // converting received message to upper case
 				System.out.println("Server said: " + fromServer);
             out.println(fromServer); // sending the converted message back to the Client via ServerRouter
          }

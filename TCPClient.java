@@ -3,33 +3,33 @@ import java.net.*;
 
     public class TCPClient {
        public static void main(String[] args) throws IOException
-	   {
-      	
-			// Variables for setting up connection and communication
-         Socket Socket = null; // socket to connect with ServerRouter
-         PrintWriter out = null; // for writing to ServerRouter
-         BufferedReader in = null; // for reading form ServerRouter
-			InetAddress addr = InetAddress.getLocalHost();
-			
-			//this line gives hostName/hostIP, which can be used for setup of
-			//router name and client address (when used locally)
-			String host = addr.getHostAddress(); // Server machine's IP
-			String[] iNetHost = new String[2];
-			
-			System.out.println("Host: " + addr);
+       {
+  	
+		// Variables for setting up connection and communication
+	    Socket Socket = null; // socket to connect with ServerRouter
+	    PrintWriter out = null; // for writing to ServerRouter
+	    BufferedReader in = null; // for reading form ServerRouter
+		InetAddress addr = InetAddress.getLocalHost();
+		
+		//this line gives hostName/hostIP, which can be used for setup of
+		//router name and client address (when used locally)
+		String host = addr.getHostAddress(); // Server machine's IP
+		String[] iNetHost = new String[2];
+		
+		System.out.println("Host: " + addr);
 
-			iNetHost = addr.toString().split("/");
-						
-			System.out.println("Currently the serverhost is " + iNetHost[0]);
-			System.out.println("Currently the serverip is " + iNetHost[1]);
-			
-			String routerName = iNetHost[0]; // ServerRouter host name
-			
-//			String host = addr.getHostAddress(); // Client machine's IP
-//      	String routerName = "j263-08.cse1.spsu.edu"; // ServerRouter host name
-			int SockNum = 5555; // port number
-			
-			// Tries to connect to the ServerRouter
+		iNetHost = addr.toString().split("/");
+					
+		System.out.println("Currently the serverhost is " + iNetHost[0]);
+		System.out.println("Currently the serverip is " + iNetHost[1]);
+		
+		String routerName = iNetHost[0]; // ServerRouter host name
+		
+		//String host = addr.getHostAddress(); // Client machine's IP
+		//String routerName = "j263-08.cse1.spsu.edu"; // ServerRouter host name
+		int SockNum = 5555; // port number
+		
+		// Tries to connect to the ServerRouter
          try {
             Socket = new Socket(routerName, SockNum);
             out = new PrintWriter(Socket.getOutputStream(), true);
@@ -50,16 +50,17 @@ import java.net.*;
          Reader reader = new FileReader(f1);
         	 
 		 BufferedReader fromFile =  new BufferedReader(reader); // reader for the string file
+				 
          String fromServer; // messages received from ServerRouter
          String fromUser; // messages sent to ServerRouter
-			String address = iNetHost[1]; // destination IP (Server)
-			long t0, t1, t;
+		 String address = iNetHost[1]; // destination IP (Server)
+		 long t0, t1, t;
 			
 			// Communication process (initial sends/receives
 			out.println(address);// initial send (IP of the destination Server)
 			fromServer = in.readLine();//initial receive from router (verification of connection)
 			System.out.println("ServerRouter: " + fromServer);
-			out.println(host); // Client sends the IP of its machine as initial send
+			out.println(address); // Client sends the IP of its machine as initial send
 			t0 = System.currentTimeMillis();
       	
 			// Communication while loop
@@ -77,7 +78,7 @@ import java.net.*;
                out.println(fromUser); // sending the strings to the Server via ServerRouter
 					t0 = System.currentTimeMillis();
             }
-         }      	
+         }
 			// closing connections
          out.close();
          in.close();
